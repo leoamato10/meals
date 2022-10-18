@@ -5,8 +5,9 @@ class FilterScreen extends StatefulWidget {
   static const routeName = "/filters";
 
   final Function saveFilters;
+  Map<String, bool> currentFilters;
 
-  FilterScreen(this.saveFilters);
+  FilterScreen(this.saveFilters, this.currentFilters);
 
   @override
   State<FilterScreen> createState() => _FilterScreenState();
@@ -17,6 +18,15 @@ class _FilterScreenState extends State<FilterScreen> {
   bool _vegetarian = false;
   bool _vegan = false;
   bool _lactoseFree = false;
+
+  @override
+  initState() {
+    _glutenFree = widget.currentFilters['gluten'];
+    _lactoseFree = widget.currentFilters['lactose'];
+    _vegetarian = widget.currentFilters['vegetarian'];
+    _vegan = widget.currentFilters['vegan'];
+    super.initState();
+  }
 
   Widget _buildSwitchTile(
       String title, String subtitle, bool currentVal, Function updateVal) {
